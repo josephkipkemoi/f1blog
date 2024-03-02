@@ -1,0 +1,7 @@
+.main-header h1 {
+    color: darkorange;
+    font-weight: bolder;
+  }
+  .main-header-body hr {
+    border: 1px solid cyan;
+  }

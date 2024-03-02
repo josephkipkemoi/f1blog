@@ -1,0 +1,15 @@
+@media only screen and (min-width: 600px) {
+    .article_container {
+        width: 70%;
+    }
+}
+.article_img {
+    max-width: 720px;
+}
+.article_body {
+    position: relative;
+}
+.article_body p{
+     letter-spacing: 2px;
+    line-height: 36px;
+}

@@ -1,0 +1,24 @@
+
+.comment_img img {
+    width: 58px;
+    height: 52px;
+    border: 1px solid cyan;
+    border-radius: 40%;
+    padding: 3px;
+    margin-right: 12px;
+}
+.comment_text {
+    
+    margin-left: 70px;
+}
+.comment_textarea textarea{
+    height: 102px;
+    letter-spacing: 2px;
+    line-height: 24px;
+    font-size: 15px;
+}
+.word_counter {
+    float: right;
+    margin-top: 12px;
+    margin-bottom: 6px;
+}
