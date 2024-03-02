@@ -1,8 +1,8 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import './article.css'
 import CommentComponent from "./comment"
+import axios from "../lib/axios"
 
 const ArticleComponent = ({ articleId }) => {
     const [article, setArticle] = useState({
@@ -16,7 +16,7 @@ const ArticleComponent = ({ articleId }) => {
 
     const fetchArticleById = async () => {
         try {
-            const {data, status} = await axios.get(`http://127.0.0.1:5050/api/v1/blogs/${articleId}`)
+            const {data, status} = await axios.get(`/api/v1/blogs/${articleId}`)
             if (status == 200) {
                 setArticle(data?.data)
             }
