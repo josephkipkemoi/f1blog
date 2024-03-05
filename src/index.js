@@ -10,6 +10,7 @@ import RegisterPage from './pages/register';
 import ArticlePage from './pages/article';
 import AdminPage from './pages/admin';
 import { ProtectedRoute } from './hooks/protectedRoute';
+import ProfilePage from './pages/profile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,6 +23,7 @@ root.render(
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/articles/:article_id' element={<ArticlePage />} />
         <Route path='/contact-us' element={<ContactPage />} />
+        <Route path='/profile' element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
