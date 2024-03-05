@@ -37,8 +37,8 @@ const ArticleComponent = ({ articleId }) => {
     return (
         <div className="card p-2 mx-auto article_container mt-3 mb-3 shadow border-0">
             <div className="card card-body border-0">
-                <div className="article_img">
-                    <img className="img-fluid" src={image_url} alt={image_url}/>
+                <div className="article_img d-flex justify-content-center">
+                    <img className="img-fluid rounded-3" src={image_url} alt={image_url}/>
                 </div>
                 <div className="article_body">
                     <div className="text-secondary mt-2 mb-2">
