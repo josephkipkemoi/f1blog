@@ -1,6 +1,18 @@
-import { useState } from "react"
+import Quill from "quill"
+import { useEffect, useState } from "react"
+import axios from "../lib/axios"
 
 const AdminComponent = () => {
+  
+    return (
+        <div className="card">
+            <NewArticleComponent/>
+        </div>
+    )
+}
+
+const NewArticleComponent = () => {
+    const [articleLoaded, setArticleLoaded] = useState(false)
     const [article, setArticle] = useState({
         title: '',
         image_url: '',
@@ -10,36 +22,50 @@ const AdminComponent = () => {
 
     const onchange = e => setArticle({...article, [e.target.name]: e.target.value})
 
-    const onsubmit = () => {
-        console.log(article)
+    const onsubmit = async () => {
+        try {
+            const { status } = await axios.post("api/v1/blog/new", { body: article.body })
+            if(status == 201) {
+                setArticleLoaded(true)
+            }
+        } catch (error) {
+            console.error(error)
+        }
     }
+
+    const loadQuil = () => {
+        const container = document.getElementById("editor")
+        const options = {
+            modules: {
+                toolbar: true
+            },
+            placeholder: 'Write article here...',
+            theme: 'snow'
+        }
+        const quil = new Quill(container, options)
+        quil.on("text-change", () => {
+            setArticle({...article, body: JSON.stringify(quil.container.firstChild.innerHTML)})
+        })
+    }
+
+    useEffect(() => {
+        loadQuil()
+    }, [window.location.href])
     return (
-        <div className="card">
-            <div className="card card-header">
-                <h4>Write new article</h4>
+        <>
+            <div className="card card-header bg-secondary">
+                <h4 className="text-white">Article</h4>
             </div>
             <div className="card card-body">
-                <div>
-                    <label htmlFor="article_title">Article TItle *:</label>
-                    <input placeholder="Enter article title" id="article_title" className="form-control p-3 mt-2 mb-2" name="title" onChange={onchange}/>
+                <div className="mt-2 mb-4">
+                    <label htmlFor="article_body" className="mb-3">Write Article *</label>
+                    <div id="editor"></div>
                 </div>
-                <div>
-                    <label htmlFor="article_author">Article Author *:</label>
-                    <input placeholder="Enter author name" id="article_author" className="form-control p-3 mt-2 mb-2" name="author" onChange={onchange}/>
-                </div>
-                <div>
-                    <label htmlFor="article_image">Image Url *:</label>
-                    <input placeholder="Enter image url" id="article_image" className="form-control p-3 mt-2 mb-2" name="image_url" onChange={onchange}/>
-                </div>
-                <div>
-                    <label htmlFor="article_body">Write Article *: <small>Max. 400 words</small></label>
-                    <textarea className="form-control mb-2 mt-2" placeholder="Write article here..." name="body" onChange={onchange}/>
-                </div>
-                <div>
-                    <button className="btn btn-primary" onClick={onsubmit}>Submit</button>
+                <div className="text-center">
+                    <button className="btn btn-primary" onClick={onsubmit}>Post Article</button>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
