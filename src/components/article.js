@@ -24,6 +24,11 @@ const ArticleComponent = ({ articleId }) => {
             console.error(error)
         }
     }
+
+    const ArticlePost = () => {
+        const markup = { __html: body };
+        return <div dangerouslySetInnerHTML={markup} />;
+    }
     
     useEffect(() => {
         fetchArticleById()
@@ -31,26 +36,21 @@ const ArticleComponent = ({ articleId }) => {
 
     return (
         <div className="card p-2 mx-auto article_container mt-3 mb-3 shadow border-0">
-            <div className="card card-header border-0 bg-white">
-                <h4>{title}</h4>
-            </div>
             <div className="card card-body border-0">
                 <div className="article_img">
                     <img className="img-fluid" src={image_url} alt={image_url}/>
                 </div>
                 <div className="article_body">
                     <div className="text-secondary mt-2 mb-2">
-                        <small >Author: {author}</small>
+                        <small >Author: {author ?? "anonymous"}</small>
                     </div>
-                    <p>{body}</p>
+                    <ArticlePost/>
                     <small>
                         <Link to="/" className="nav-link text-primary">Back to home</Link>
                     </small>
                     <CommentComponent articleId={articleId}/>
                 </div>
-            
             </div>
-    
         </div>
     )
 }

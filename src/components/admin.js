@@ -24,13 +24,18 @@ const NewArticleComponent = () => {
 
     const onsubmit = async () => {
         try {
-            const { status } = await axios.post("api/v1/blog/new", { body: article.body })
+            const { status } = await axios.post("api/v1/blog/new", article)
             if(status == 201) {
                 setArticleLoaded(true)
             }
         } catch (error) {
             console.error(error)
         }
+    }
+
+    const handleSuccessfulArticle = () => {
+        setArticleLoaded(false)
+        alert("Article uploaded succesfully!")
     }
 
     const loadQuil = () => {
@@ -44,7 +49,7 @@ const NewArticleComponent = () => {
         }
         const quil = new Quill(container, options)
         quil.on("text-change", () => {
-            setArticle({...article, body: JSON.stringify(quil.container.firstChild.innerHTML)})
+            setArticle({...article, body: quil.container.firstChild.innerHTML})
         })
     }
 
@@ -53,10 +58,26 @@ const NewArticleComponent = () => {
     }, [window.location.href])
     return (
         <>
+            {articleLoaded && handleSuccessfulArticle()}
             <div className="card card-header bg-secondary">
                 <h4 className="text-white">Article</h4>
             </div>
             <div className="card card-body">
+                <div className="mb-3">
+                    <label className="mb-2">Title *</label>
+                    <input type="text" name="title" className="form-control p-2 border-danger" placeholder="Enter article title" onChange={onchange}/>
+                </div>
+                <div className="row mb-3">
+                    <div className="col col-sm">
+                        <label className="mb-2">Author *</label>
+                        <input className="form-control" type="text" name="author" placeholder="Article author" onChange={onchange}/>
+                    </div>
+                    <div className="col col-sm">
+                        <label className="mb-2">Image URL *</label>
+                        <input className="form-control" type="text" name="image_url" placeholder="Image url" onChange={onchange}/>
+                    </div>
+                </div>
+               
                 <div className="mt-2 mb-4">
                     <label htmlFor="article_body" className="mb-3">Write Article *</label>
                     <div id="editor"></div>

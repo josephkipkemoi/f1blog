@@ -3,7 +3,7 @@ import axios from '../lib/axios';
 import { useEffect, useState } from 'react';
 import './blogs.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCarBurst, faClock, faFaceFlushed, faFaceGrin, faFaceGrinHearts, faFaceKissBeam, faFaceSmile, faHeart, faJournalWhills, faPerson, faPersonCirclePlus, faShare, faShareAlt, faShareAltSquare, faShareNodes, faTimesCircle, faUserAltSlash } from '@fortawesome/free-solid-svg-icons';
+import { faCarBurst, faClock, faHeart,faShareNodes } from '@fortawesome/free-solid-svg-icons';
 
 const BlogPage = () => {
     const [data, setData] = useState([])
@@ -32,10 +32,9 @@ const BlogPage = () => {
             <FontAwesomeIcon icon={faCarBurst} size='lg'/>
             Trending Now
             </h3>
-
         </div>
           {data.map((d,i) => {
-            const { body, image_url, title, ID, CreatedAt } = d
+            const {image_url, title, ID, CreatedAt } = d
             const time = new Date(CreatedAt)
             return (
                   <div key={i} className='border-0 shadow rounded-4 p-3 m-1 mb-2 col col-lg blog_body_container'>
@@ -58,9 +57,7 @@ const BlogPage = () => {
                           {time.getDay() + "|" + time.getMonth()}
                         </small>
                       </div>
-                      <div className='p-1 m-1 blog_body'>
-                        <p className='text-light'>{body}</p>
-                      </div>
+                
                       <div className='d-flex justify-content-between mt-2 m-1'>
                         <div>
                           <Link to={`/articles/${ID}`} className='btn text-primary btn-sm fw-bold'>Read More...</Link>
