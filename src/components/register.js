@@ -1,9 +1,15 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Link, Navigate, redirect } from "react-router-dom"
 import axios from '../lib/axios'
 import { useLocalStorage } from "../hooks/useLocalStorage"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons"
+import ErrorComponent from './error'
 
 const RegisterComponent = () => {
+    const [userLoading, setUserLoading] = useState(false)
+    const [errors, setErrors] = useState([])
+
     const [user,] = useLocalStorage("user", null)
 
     const [details, setDetails] = useState({
@@ -25,20 +31,24 @@ const RegisterComponent = () => {
 
     const handleCheck = e => setDetails({...details, [e.target.name]: e.target.checked})
     
+    const emptyErrors = () => setErrors([])
+
     const onsubmit = async () => {
+        setUserLoading(true)
         try { 
             const {data: { token, user }, status} = await axios.post("/api/v1/auth/user/register", details)
             if (status == 201) {
                 localStorage.setItem("token", token)
                 localStorage.setItem("user", JSON.stringify(user))
                 window.location.href = "/"
+                setUserLoading(false)
             }
         } catch (error) {
+            setUserLoading(false)
             console.error(error)
         }
     }
 
- 
     return (
         <div className="card mb-5">
             <div className="card card-header m-2 bg-light border-0">
@@ -49,6 +59,9 @@ const RegisterComponent = () => {
                     <small>All fields marked with asterix ( * ) MUST be filled</small>
                 </div>
                 <div>
+
+                {errors.length > 0 && <ErrorComponent error={errors} setError={emptyErrors}/>}
+                    
                     <label htmlFor="first_name">First name *:</label>
                     <input 
                         type="text" 
@@ -115,19 +128,34 @@ const RegisterComponent = () => {
                         name="rememberMe"
                         onChange={handleCheck}
                     />
-                    <label htmlFor="checkbox" className="m-1">I accept the Terms and Conditions</label>
+                    <label htmlFor="checkbox" className="m-1">
+                        <small>
+                            By clicking Register you accept the Terms and Conditions herein
+                        </small>
+                    </label>
                 </div>
                 <div className="mt-2 mb-2">
                 <span className="d-flex justify-content-end">
-                    Already Registered?
-                    <Link className="nav-link text-primary" to="/login">Login Here</Link>
+                   <span className="m-1">Already Registered?</span> 
+                    <Link className="nav-link text-primary m-1" to="/login">Login Here</Link>
                  </span>
+                    {userLoading ? 
+                       <button 
+                       className="btn btn-primary p-2 m-1 fw-bold" 
+                       disabled={true}
+                        >
+                            Loading...
+                        </button>
+                    :
                     <button 
-                        className="btn btn-primary w-50" 
-                        onClick={onsubmit}
+                    className="btn btn-primary fw-bold" 
+                    onClick={onsubmit}
                     >
-                        Register
+                        <FontAwesomeIcon icon={faUserPlus} />
+                        <span className="m-1">Register</span>
                     </button>
+                    }
+                 
                 </div>
             </div>
         </div>
