@@ -11,6 +11,7 @@ import ArticlePage from './pages/article';
 import AdminPage from './pages/admin';
 import { ProtectedRoute } from './hooks/protectedRoute';
 import ProfilePage from './pages/profile';
+import NotificationPage from './pages/notifications';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,6 +25,7 @@ root.render(
         <Route path='/articles/:article_id' element={<ArticlePage />} />
         <Route path='/contact-us' element={<ContactPage />} />
         <Route path='/profile' element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}/>
+        <Route path='/notifications' element={<ProtectedRoute><NotificationPage/></ProtectedRoute>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
