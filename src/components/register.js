@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link, redirect } from "react-router-dom"
+import { Link, Navigate, redirect } from "react-router-dom"
 import axios from '../lib/axios'
 
 const RegisterComponent = () => {
@@ -19,9 +19,10 @@ const RegisterComponent = () => {
     
     const onsubmit = async () => {
         try { 
-            const {data: { token }, status} = await axios.post("/api/v1/auth/user/register", details)
+            const {data: { token, user }, status} = await axios.post("/api/v1/auth/user/register", details)
             if (status == 201) {
                 localStorage.setItem("token", token)
+                localStorage.setItem("user", JSON.stringify(user))
                 window.location.href = "/"
             }
         } catch (error) {

@@ -9,6 +9,7 @@ import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
 import ArticlePage from './pages/article';
 import AdminPage from './pages/admin';
+import { ProtectedRoute } from './hooks/protectedRoute';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,7 +17,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />} />
-        <Route path='/admin' element={<AdminPage />} />
+        <Route path='/admin' element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/articles/:article_id' element={<ArticlePage />} />
