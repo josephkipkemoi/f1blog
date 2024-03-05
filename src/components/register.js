@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, redirect } from "react-router-dom"
 import axios from '../lib/axios'
 
 const RegisterComponent = () => {
@@ -18,9 +18,12 @@ const RegisterComponent = () => {
     const handleCheck = e => setDetails({...details, [e.target.name]: e.target.checked})
     
     const onsubmit = async () => {
-        try {
-            const res = await axios.post("/api/v1/auth/user/register", details)
-            console.log(res)
+        try { 
+            const {data: { token }, status} = await axios.post("/api/v1/auth/user/register", details)
+            if (status == 201) {
+                localStorage.setItem("token", token)
+                window.location.href = "/"
+            }
         } catch (error) {
             console.error(error)
         }
