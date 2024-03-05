@@ -13,6 +13,7 @@ import { ProtectedRoute } from './hooks/protectedRoute';
 import ProfilePage from './pages/profile';
 import NotificationPage from './pages/notifications';
 import MessagePage from './pages/messages';
+import DonatePage from './pages/donate';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -28,6 +29,7 @@ root.render(
         <Route path='/profile' element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}/>
         <Route path='/notifications' element={<ProtectedRoute><NotificationPage/></ProtectedRoute>}/>
         <Route path='/messages' element={<ProtectedRoute><MessagePage/></ProtectedRoute>}/>
+        <Route path='/donate' element={<DonatePage/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

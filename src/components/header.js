@@ -17,9 +17,14 @@ const HeaderComponent = () => {
           {user ? <AuthenticatedLinks/> : <UnauthenticatedLinks/>}
         </div>
         <hr/>
-        <div className='d-flex'>
-          <Link to='/' className='nav-link text-white btn m-1'>Home</Link>
-          <Link to='/contact-us' className='nav-link text-white btn m-1'>Contact Us</Link>
+        <div className='d-flex justify-content-between'>
+          <div className="d-flex">
+            <Link to='/' className='nav-link text-white btn m-1'>Home</Link>
+            <Link to='/contact-us' className='nav-link text-white btn m-1'>Contact Us</Link>
+          </div>
+        <div>
+          <Link to='/donate' className='nav-link text-white btn m-1'>Donate</Link>
+        </div>
         </div>
       </div>
     )
