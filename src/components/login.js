@@ -1,6 +1,13 @@
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
+import { useLocalStorage } from "../hooks/useLocalStorage"
 
 const LoginComponent = () => {
+    const [user,] = useLocalStorage("user", null)
+
+    if(user) {
+        return <Navigate to={"/"}/>
+    }
+    
     return (
         <div className="card mb-5">
             <div className="card card-header m-2 bg-light border-0">
