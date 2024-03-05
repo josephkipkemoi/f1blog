@@ -1,8 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, Navigate, redirect } from "react-router-dom"
 import axios from '../lib/axios'
+import { useLocalStorage } from "../hooks/useLocalStorage"
 
 const RegisterComponent = () => {
+    const [user,] = useLocalStorage("user", null)
+
     const [details, setDetails] = useState({
         firstName: '',
         lastName: '',
@@ -11,8 +14,13 @@ const RegisterComponent = () => {
         confirmPassword: '',
         rememberMe: false
     })
-    const { firstName, lastName, email, password, confirmPassword } = details
+    
+    if(user) {
+        return <Navigate to={"/"}/>
+    }
 
+    const { firstName, lastName, email, password, confirmPassword } = details
+  
     const onchange = e => setDetails({...details, [e.target.name]: e.target.value})
 
     const handleCheck = e => setDetails({...details, [e.target.name]: e.target.checked})
@@ -29,6 +37,8 @@ const RegisterComponent = () => {
             console.error(error)
         }
     }
+
+ 
     return (
         <div className="card mb-5">
             <div className="card card-header m-2 bg-light border-0">
