@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import "./header.css"
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBell, faMessage, faUser } from "@fortawesome/free-solid-svg-icons"
+import { useEffect } from "react"
 
 const HeaderComponent = () => {
     const [user,] = useLocalStorage("user", null)
@@ -25,6 +26,15 @@ const HeaderComponent = () => {
 }
 
 const AuthenticatedLinks = () => {
+  const [_, setUser] = useLocalStorage("user")
+  
+  const handleLogout = () => {
+    localStorage.removeItem("user")
+    localStorage.removeItem("token")
+    setUser(null)
+    window.location.href = "/"
+  }
+
   return (
     <div className="d-flex">
       <div className="m-1">
@@ -40,7 +50,7 @@ const AuthenticatedLinks = () => {
       </div>
    
       <div className="m-1">
-        <button className="btn btn-warning">Logout</button>
+        <button className="btn btn-warning" onClick={handleLogout}>Logout</button>
       </div>
     </div>
   )
