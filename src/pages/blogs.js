@@ -37,28 +37,35 @@ const BlogPage = () => {
             const {image_url, title, ID, CreatedAt } = d
             const time = new Date(CreatedAt)
             return (
-                  <div key={i} className='border-0 shadow rounded-4 p-3 m-1 mb-2 col col-lg blog_body_container'>
+                  <div key={i} className='border-0 shadow rounded-0 p-3 m-1 mb-2 col col-lg blog_body_container'>
                   <div>
                     <div className='blog_header p-1'>
                       <Link to={`/articles/${ID}`} className='nav-link'>
-                        <h5 className='fw-bold'>{title}</h5>
+                        <h6 className='fw-bold'>{title}</h6>
                       </Link>
                     </div>
+                    <hr/>
                       <div className='image_body mb-2 mt-2 shadow-sm rounded-4 border-0 p-2 bg-none d-flex align-items-center'>
                           <img className='img-fluid rounded-4' src={image_url} alt='featured'/>
                       </div>
-                      <div className='d-flex justify-content-end mb- align-items-center text-secondary p-2 pt-0 pb-0'>
-                      <FontAwesomeIcon 
+                    
+                      <div className='d-flex justify-content-between align-items-center text-secondary p-2 pt-0 pb-0 category_date'>
+                      <div>
+                        <small className='btn btn-outline-warning rounded-5 btn-sm'>News</small>
+                      </div>
+                      <div className='d-flex align-items-center'>
+                        <FontAwesomeIcon 
                           icon={faClock} 
                           size='sm' 
                           className='m-1'
-                          /> 
-                        <small className='text-secondary'>  
-                          {time.getDay() + "|" + time.getMonth()}
-                        </small>
+                        /> 
+                        <span className='text-secondary'>  
+                          {time.getDay() + " | " + time.getMonth()}
+                        </span>
                       </div>
-                
-                      <div className='d-flex justify-content-between mt-2 m-1'>
+                      </div>
+                      <hr/>
+                      <div className='d-flex justify-content-between mt-3'>
                         <div>
                           <Link to={`/articles/${ID}`} className='btn text-primary btn-sm fw-bold'>Read More...</Link>
                         </div>

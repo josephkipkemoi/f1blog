@@ -2,7 +2,7 @@ import { Link, Navigate } from "react-router-dom"
 import "./header.css"
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBell, faMessage, faUser } from "@fortawesome/free-solid-svg-icons"
+import { faBell, faContactCard, faDollarSign, faHome, faMailBulk, faMessage, faMoneyBill, faMoneyBillTrendUp, faUser } from "@fortawesome/free-solid-svg-icons"
 import { useEffect } from "react"
 
 const HeaderComponent = () => {
@@ -17,9 +17,27 @@ const HeaderComponent = () => {
           {user ? <AuthenticatedLinks/> : <UnauthenticatedLinks/>}
         </div>
         <hr/>
-        <div className='d-flex'>
-          <Link to='/' className='nav-link text-white btn m-1'>Home</Link>
-          <Link to='/contact-us' className='nav-link text-white btn m-1'>Contact Us</Link>
+        <div className='d-flex justify-content-between'>
+          <div className="d-flex">
+            <Link to='/' className='nav-link text-white btn m-1'>
+              <FontAwesomeIcon icon={faHome} />
+              <span className="m-1">Home</span>
+            </Link>
+            <Link to='/tips' className='nav-link text-white btn m-1'>
+              <FontAwesomeIcon icon={faMoneyBillTrendUp} />
+              <span className="m-1">Tips</span>  
+            </Link>
+            <Link to='/contact-us' className='nav-link text-white btn m-1'>
+              <FontAwesomeIcon icon={faMailBulk} />
+              <span className="m-1">Contact Us</span>  
+            </Link>
+          </div>
+        <div>
+          <Link to='/donate' className='nav-link text-white btn m-1 fw-bold'>
+            <FontAwesomeIcon icon={faDollarSign} />
+            <span className="m-1">Donate</span>
+          </Link>
+        </div>
         </div>
       </div>
     )
