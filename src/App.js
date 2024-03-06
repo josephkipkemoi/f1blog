@@ -9,7 +9,9 @@ function App() {
   return (
     <div>
           <HeaderComponent/>
-          <BlogPage/>
+            <div className='blog_page_body'>
+              <BlogPage/>
+            </div>
           <FooterComponent/>
     </div>
   );
