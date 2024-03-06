@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import './article.css'
 import CommentComponent from "./comment"
 import axios from "../lib/axios"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons"
 
 const ArticleComponent = ({ articleId }) => {
     const [article, setArticle] = useState({
@@ -29,7 +31,17 @@ const ArticleComponent = ({ articleId }) => {
         const markup = { __html: body };
         return <div dangerouslySetInnerHTML={markup} />;
     }
+
+    const handlePrevClick = () => {
+        let id = Number(articleId) - 1
+        window.location.href = "/articles/" + id
+    }
     
+    const handleNextClick = () => {
+        let id = Number(articleId) + 1
+        window.location.href = "/articles/" + id
+    }
+
     useEffect(() => {
         fetchArticleById()
     }, [articleId])
@@ -41,11 +53,17 @@ const ArticleComponent = ({ articleId }) => {
                     <img className="img-fluid rounded-3" src={image_url} alt={image_url}/>
                 </div>
                 <div className="article_body">
+                    <button className="side_btn_1 btn btn-dark" onClick={handlePrevClick}>
+                        <FontAwesomeIcon icon={faArrowLeft} size="xl"/>
+                    </button>
                     <div className="text-secondary mt-2 mb-2">
                         <small >Author: {author ?? "anonymous"}</small>
                     </div>
+                    <button className="side_btn btn btn-dark" onClick={handleNextClick}>
+                        <FontAwesomeIcon icon={faArrowRight} size="xl"/>
+                    </button>
                     <ArticlePost/>
-                    <small>
+                    <small className="mr-5">
                         <Link to="/" className="nav-link text-primary">Back to home</Link>
                     </small>
                     <CommentComponent articleId={articleId}/>
