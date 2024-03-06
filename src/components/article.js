@@ -5,8 +5,10 @@ import CommentComponent from "./comment"
 import axios from "../lib/axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons"
+import LoaderIcon from '../utils/loader'
 
 const ArticleComponent = ({ articleId }) => {
+    const [articleLoaded, setArticleLoaded] = useState(false)
     const [article, setArticle] = useState({
         title: '',
         body: '',
@@ -21,6 +23,7 @@ const ArticleComponent = ({ articleId }) => {
             const {data, status} = await axios.get(`/api/v1/blogs/${articleId}`)
             if (status == 200) {
                 setArticle(data?.data)
+                setArticleLoaded(true)
             }
         } catch (error) {
             console.error(error)
@@ -44,31 +47,37 @@ const ArticleComponent = ({ articleId }) => {
 
     useEffect(() => {
         fetchArticleById()
-    }, [articleId])
+    }, [articleId, articleLoaded])
 
     return (
         <div className="card p-2 mx-auto article_container mt-3 mb-3 shadow border-0">
+           {articleLoaded ?
             <div className="card card-body border-0">
-                <div className="article_img d-flex justify-content-center">
-                    <img className="img-fluid rounded-3" src={image_url} alt={image_url}/>
-                </div>
-                <div className="article_body">
-                    <button className="side_btn_1 btn btn-dark" onClick={handlePrevClick}>
-                        <FontAwesomeIcon icon={faArrowLeft} size="xl"/>
-                    </button>
-                    <div className="text-secondary mt-2 mb-2">
-                        <small >Author: {author ?? "anonymous"}</small>
-                    </div>
-                    <button className="side_btn btn btn-dark" onClick={handleNextClick}>
-                        <FontAwesomeIcon icon={faArrowRight} size="xl"/>
-                    </button>
-                    <ArticlePost/>
-                    <small className="mr-5">
-                        <Link to="/" className="nav-link text-primary">Back to home</Link>
-                    </small>
-                    <CommentComponent articleId={articleId}/>
-                </div>
+            <div>
+                <h3>{title}</h3>
+                <hr/>
             </div>
+            <div className="article_img d-flex justify-content-center p-2">
+                <img className="img-fluid rounded-3" src={image_url} alt={"F1 photo"}/>
+            </div>
+            <div className="article_body">
+                <button className="side_btn_1 btn btn-dark" onClick={handlePrevClick}>
+                    <FontAwesomeIcon icon={faArrowLeft} size="xl"/>
+                </button>
+                <div className="text-secondary mt-2 mb-2">
+                    <small >Author: {author ?? "anonymous"}</small>
+                </div>
+                <button className="side_btn btn btn-dark" onClick={handleNextClick}>
+                    <FontAwesomeIcon icon={faArrowRight} size="xl"/>
+                </button>
+                <ArticlePost/>
+                <small className="mr-5">
+                    <Link to="/" className="nav-link text-primary">Back to home</Link>
+                </small>
+                <CommentComponent articleId={articleId}/>
+            </div>
+        </div> :
+        <LoaderIcon/>}
         </div>
     )
 }
