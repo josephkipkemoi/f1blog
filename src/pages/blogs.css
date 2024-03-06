@@ -1,16 +1,20 @@
 .blog_body_container {
     width:440px ;
-    background: linear-gradient(rgba(0, 0, 0, 0.911),rgba(0, 0, 0, 0.87), rgba(0, 0, 0, 0.884));
+    background: linear-gradient(rgba(217, 212, 212, 0.911),rgba(235, 230, 230, 0.87), rgba(225, 219, 219, 0.884));
 }
 .main-container {
-    background: linear-gradient(rgba(0, 0, 0, 0.911),rgba(0, 0, 0, 0.87), rgba(0, 0, 0, 0.884));
+    background: whitesmoke;
+    min-height: 100vh;
+    color: black;
+}
+.blog-main-header {
+    background: linear-gradient(rgba(217, 212, 212, 0.911),rgba(235, 230, 230, 0.87), rgba(225, 219, 219, 0.884));
 }
 .blog-main-header  h2 {
     line-height: 32px;
     letter-spacing: 1px;  
 }
 .blog_header h5 {
-    color: orange;
     line-height: 32px;
     letter-spacing: 1px;
 }

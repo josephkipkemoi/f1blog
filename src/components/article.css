@@ -3,8 +3,11 @@
         width: 70%;
     }
 }
+.article_container {
+    min-height: 100vh;
+}
 .article_img img {
-    width: 420px;
+    min-width: 420px;
 }
 .article_body {
     position: static;
