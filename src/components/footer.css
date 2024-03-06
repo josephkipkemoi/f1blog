@@ -3,5 +3,5 @@ footer {
     left: 0;
     width: 100%;
     bottom: 0;
-    width: 100vw;
+    background: linear-gradient(#f2efef93, #e9e7e7be);
 }
