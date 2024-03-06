@@ -16,15 +16,20 @@ const NewArticleComponent = () => {
     const [article, setArticle] = useState({
         title: '',
         image_url: '',
-        author: '',
-        body: ''
+        author: ''
     })
+    const [articleBody, setArticleBody] = useState('')
 
     const onchange = e => setArticle({...article, [e.target.name]: e.target.value})
 
     const onsubmit = async () => {
         try {
-            const { status } = await axios.post("api/v1/blog/new", article)
+            const { status } = await axios.post("api/v1/blog/new", {
+                image_url: article.image_url,
+                author: article.author,
+                title: article.title,
+                body: articleBody
+            })
             if(status == 201) {
                 setArticleLoaded(true)
             }
@@ -49,7 +54,7 @@ const NewArticleComponent = () => {
         }
         const quil = new Quill(container, options)
         quil.on("text-change", () => {
-            setArticle({...article, body: quil.container.firstChild.innerHTML})
+            setArticleBody(quil.container.firstChild.innerHTML)
         })
     }
 
