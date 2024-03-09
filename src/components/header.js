@@ -1,39 +1,42 @@
 import { Link, Navigate } from "react-router-dom"
 import "./header.css"
+import Logo from '../logo.png'
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBell, faContactCard, faDollarSign, faHome, faMailBulk, faMessage, faMoneyBill, faMoneyBillTrendUp, faUser } from "@fortawesome/free-solid-svg-icons"
-import { useEffect } from "react"
+import { faBell, faDollarSign, faHome, faMailBulk, faMessage, faMoneyBillTrendUp, faUser } from "@fortawesome/free-solid-svg-icons"
+
 
 const HeaderComponent = () => {
     const [user,] = useLocalStorage("user", null)
 
     return (
-      <div className='p-3 bg-dark main-header-body'>
+      <div className='p-3 main-header-body'>
         <div className='main-header d-flex justify-content-between align-items-center'>
           <Link className="nav-link" to="/">
-            <h1 className='fw-bold'>F1 SECRETS</h1>
+            <h1 className='fw-bold'>
+              <img src={Logo} alt="logo"/>
+            </h1>
           </Link>
           {user ? <AuthenticatedLinks/> : <UnauthenticatedLinks/>}
         </div>
         <hr/>
-        <div className='d-flex justify-content-between'>
+        <div className='d-sm-flex justify-content-between bg-none border-light p-2 mt-4 rounded-2 shadow'>
           <div className="d-flex">
-            <Link to='/' className='nav-link text-white btn m-1'>
+            <Link to='/' className='nav-link text-light btn m-1'>
               <FontAwesomeIcon icon={faHome} />
               <span className="m-1">Home</span>
             </Link>
-            <Link to='/tips' className='nav-link text-white btn m-1'>
+            <Link to='/tips' className='nav-link text-light btn m-1'>
               <FontAwesomeIcon icon={faMoneyBillTrendUp} />
               <span className="m-1">Tips</span>  
             </Link>
-            <Link to='/contact-us' className='nav-link text-white btn m-1'>
+            <Link to='/contact-us' className='nav-link text-light btn m-1'>
               <FontAwesomeIcon icon={faMailBulk} />
-              <span className="m-1">Contact Us</span>  
+              <span className="m-1">Contact</span>  
             </Link>
           </div>
         <div>
-          <Link to='/donate' className='nav-link text-white btn m-1 fw-bold'>
+          <Link to='/donate' className='nav-link text-warning btn m-1 fw-bold'>
             <FontAwesomeIcon icon={faDollarSign} />
             <span className="m-1">Donate</span>
           </Link>

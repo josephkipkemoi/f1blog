@@ -1,7 +1,16 @@
+.main-header-body {
+  background-color: purple;
+}
 .main-header h1 {
     color: darkorange;
     font-weight: bolder;
   }
   .main-header-body hr {
-    border: 1px solid cyan;
+    border: 1px solid purple;
+  }
+  img {
+    position: absolute;
+    width: 160px;
+    top: 5px;
+    z-index: 1;
   }
