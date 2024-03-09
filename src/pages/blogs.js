@@ -3,7 +3,7 @@ import axios from '../lib/axios';
 import { useEffect, useState } from 'react';
 import './blogs.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCarBurst, faClock, faDotCircle, faHeart,faShareNodes } from '@fortawesome/free-solid-svg-icons';
+import { faArrowTrendUp, faArrowUpFromBracket, faCarBurst, faClock, faDotCircle, faHeart,faShareNodes, faUpLong } from '@fortawesome/free-solid-svg-icons';
 import LoaderIcon from '../utils/loader';
 
 const BlogPage = () => {
@@ -37,11 +37,11 @@ const BlogPage = () => {
                <span className='m-2 fw-bold'>Live updates</span>
             </h5>
           </div>
-          <div className='p-2 border-0 shadow-sm blog-main-header w-100 shadow'>
-            <h3 className='fw-bold text-dark m-2 w-100 '>
-              <FontAwesomeIcon icon={faCarBurst} size='lg'/>
-              Trending Now
-            </h3>
+          <div className='p-1 border-0 shadow-sm blog-main-header w-100 shadow'>
+            <div className='d-flex align-items-center fw-bold text-white m-1 w-100 '>
+              <FontAwesomeIcon icon={faArrowTrendUp} size='lg' className='m-2'/>
+              <h6 className='text-light fw-bold'>Trending now</h6>          
+            </div>
           </div>
           {isBlogFetched ? 
              <>
