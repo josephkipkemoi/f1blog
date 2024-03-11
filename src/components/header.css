@@ -8,7 +8,7 @@
   .main-header-body hr {
     border: 1px solid purple;
   }
-  img {
+.main-header img {
     position: absolute;
     width: 160px;
     top: 5px;
