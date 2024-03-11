@@ -74,6 +74,9 @@ const NavigationLinks = () => {
         </li>
       )
     } )}
+     <li className="nav-item active">
+        <Link className="nav-link text-light" to="/tips">Tips<span class="sr-only">(current)</span></Link>
+      </li>
       <li className="nav-item active">
         <Link className="nav-link text-light" to="/contact-us">Contact<span class="sr-only">(current)</span></Link>
       </li>
