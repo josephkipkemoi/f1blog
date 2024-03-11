@@ -6,11 +6,61 @@ const AdminComponent = () => {
   
     return (
         <div className="card">
+            <RoleComponent/>
             <CategoryComponent/>
             <NewArticleComponent/>
         </div>
     )
 }
+
+const RoleComponent = () => {
+    const [role, setRole] = useState({
+        roleName: ''
+    }) 
+
+    const onchange = e => setRole({...role, [e.target.name]: e.target.value})
+    
+    const onsubmit = async () => {
+        try {
+        const { status, data } = await axios.post("/api/v1/roles", role)
+        if (status == 201) {
+            alert("added")
+        } 
+        } catch (error) {
+            console.error(error)
+        }
+     
+    }
+    return (
+        <div className="card m-2">
+            <div className="card card-header">
+                <h6>Add Role</h6>
+            </div>
+            <div className="card card-body">
+                <input 
+                    type="select" 
+                    className="form-control border-secondary" 
+                    placeholder="enter role"
+                    name="roleName"
+                    onChange={onchange}
+                />
+                <div>
+                    <button 
+                        className="btn btn-primary mt-2"
+                        onClick={onsubmit}
+                    >
+                        Submit
+                    </button>
+                </div>
+                
+            </div>
+            <div className="card card-header">
+                <h6>Assign Role</h6>
+            </div>
+        </div>
+    )
+}
+
 
 const CategoryComponent = () => {
     const [category, setCategory] = useState({
@@ -20,11 +70,9 @@ const CategoryComponent = () => {
     const onchange = e => setCategory({...category, [e.target.name]: e.target.value})
     
     const onsubmit = async () => {
-        console.log(category)
         try {
-        const { status, data } = await axios.post("/api/v1/category", category)
+        const { status } = await axios.post("/api/v1/category", category)
         if (status == 201) {
-            console.log(data)
             alert("added")
         } 
         } catch (error) {
