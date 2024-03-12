@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
           <HeaderComponent/>
-            <div className='blog_page_body'>
+            <div className='container blog_page_body'>
               <BlogPage/>
             </div>
           <FooterComponent/>

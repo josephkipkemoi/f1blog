@@ -28,19 +28,12 @@ const BlogPage = () => {
     }, [isBlogFetched])
     
     return (
-      <div className='card border-0 d-flex align-items-center mb-5 bg-light'>
+      <div className='card border-0 d-flex align-items-center mb-5'>
        <div className='shadow border-0 main-container w-100'>
           <div className='row'>
-          <div className='bg-light p-1 text-white shadow'>
-            <h5 className='d-flex align-items-center justify-content-center text-danger p-1'>
-               <FontAwesomeIcon icon={faDotCircle} size='sm'   />
-               <span className='m-2 fw-bold'>Live updates</span>
-            </h5>
-          </div>
-          <div className='p-1 border-0 shadow-sm blog-main-header w-100 shadow'>
-            <div className='d-flex align-items-center fw-bold text-white m-1 w-100 '>
-              <FontAwesomeIcon icon={faArrowTrendUp} size='lg' className='m-2'/>
-              <h6 className='text-light fw-bold'>Trending now</h6>          
+          <div className='p-1 mt-2 border-0 shadow-sm w-100 shadow'>
+            <div className='d-flex align-items-center fw-bold m-1 w-100 '>
+              <h4 className='text-dark fw-bold m-2'>TOP STORIES</h4>          
             </div>
           </div>
           {isBlogFetched ? 
@@ -49,7 +42,7 @@ const BlogPage = () => {
                const {image_url, title, ID, CreatedAt } = d
                const time = new Date(CreatedAt)
                return (
-                     <div key={i} className='border-0 shadow rounded-1 p-3 m-1 mb-3 col col-lg blog_body_container'>
+                     <div key={i} className='border-0 shadow-sm rounded-1 p-3 m-1 mb-3 col col-lg blog_body_container'>
                    
                      <div>
                        <div className='blog_header p-1'>
