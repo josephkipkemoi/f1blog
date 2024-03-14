@@ -67,7 +67,7 @@ const NavigationLinks = () => {
           <Link 
             className="nav-link text-white fw-bold" 
             key={l.CreatedAt}
-            to={`/sports?c_name=${l.categoryName}`}
+            to={`/sports?c_name=${l.categoryName}&c_id=${l.ID}`}
           >
             {l.categoryName}
             <span class="sr-only">(current)</span>
