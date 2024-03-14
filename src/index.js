@@ -16,6 +16,7 @@ import MessagePage from './pages/messages';
 import DonatePage from './pages/donate';
 import TipsPage from './pages/tips';
 import SportPage from './pages/sport';
+import AboutUsPge from './pages/about-us';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -34,6 +35,7 @@ root.render(
         <Route path='/donate' element={<DonatePage/>}/>
         <Route path='/tips' element={<TipsPage/>} />
         <Route path='/sports' element={<SportPage/>}/>
+        <Route path='/about-us' element={<AboutUsPge/>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
