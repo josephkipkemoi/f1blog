@@ -74,7 +74,7 @@ const BlogPage = () => {
 
       useEffect(() => {
         fetchData()
-      }, [isBlogFetched, window.screen.width])
+      }, [isBlogFetched, window.screen.width, categoryId, categoryName])
       
     return (
       <div className={`'container card mt-3 mb-3 border-0 shadow' ${classStyle}`}>
@@ -173,4 +173,4 @@ const BlogPage = () => {
     )
   }
 
-  export default BlogPage
+  export  {BlogPage, BlogMainComponent}

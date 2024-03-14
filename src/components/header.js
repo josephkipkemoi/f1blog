@@ -129,7 +129,7 @@ const AuthenticatedLinks = () => {
 const UnauthenticatedLinks = () => {
   return (
     <div className='d-sm-flex'>
-      <Link to="/register" className='btn btn-sm text-light nav-link rounded-4 fw-bold m-2'>Register</Link>
+      {/* <Link to="/register" className='btn btn-sm text-light nav-link rounded-4 fw-bold m-2'>Register</Link> */}
       <Link to="/login" className='btn btn-sm text-warning nav-link m-2' >Log In</Link>
     </div>
   )
