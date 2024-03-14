@@ -3,5 +3,18 @@ footer {
     left: 0;
     width: 100%;
     bottom: 0;
-    background: linear-gradient(#f2efef93, #e9e7e7be);
+    padding: 32px;
+}
+p {
+    color: white;
+}
+hr {
+    color: whitesmoke;
+}
+footer a {
+    text-decoration: none;
+    margin-top: 8px;
+}
+footer a:hover {
+    text-decoration: underline;
 }
