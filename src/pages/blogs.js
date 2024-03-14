@@ -2,114 +2,175 @@ import { Link } from 'react-router-dom';
 import axios from '../lib/axios';
 import { useEffect, useState } from 'react';
 import './blogs.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowTrendUp, faArrowUpFromBracket, faCarBurst, faClock, faDotCircle, faHeart,faShareNodes, faUpLong } from '@fortawesome/free-solid-svg-icons';
 import LoaderIcon from '../utils/loader';
 
 const BlogPage = () => {
-  const [isBlogFetched, setIsBlogsFetched] = useState(false)
+    const [categoryFetching, setCategoryFetching] = useState(false)
+    const [category, setCategory] = useState([])
 
-  const [data, setData] = useState([])
-  
-    const fetchData = async () => {
+    const fetchCategory = async () => {
+      setCategoryFetching(true)
       try {
-        const {data, status} = await axios.get("/api/v1/blog")     
-        if( status == 200) {
-          setIsBlogsFetched(true)
-          setData(data?.data) 
+        const { status, data } = await axios.get("api/v1/category")
+        if (status == 200) {        
+          setCategoryFetching(false)
+          setCategory(data.data)
         }
       } catch (error) {
-          console.error(error)
+        setCategoryFetching(false)
+        console.error(error)
       }
+    
     }
 
-    useEffect(() => {
-      fetchData()
-    }, [isBlogFetched])
-    
+    useState(() => {
+      fetchCategory()
+    }, [category])
+
     return (
-      <div className='card border-0 d-flex align-items-center mb-5 bg-light'>
-       <div className='shadow border-0 main-container w-100'>
-          <div className='row'>
-          <div className='bg-light p-1 text-white shadow'>
-            <h5 className='d-flex align-items-center justify-content-center text-danger p-1'>
-               <FontAwesomeIcon icon={faDotCircle} size='sm'   />
-               <span className='m-2 fw-bold'>Live updates</span>
-            </h5>
-          </div>
-          <div className='p-1 border-0 shadow-sm blog-main-header w-100 shadow'>
-            <div className='d-flex align-items-center fw-bold text-white m-1 w-100 '>
-              <FontAwesomeIcon icon={faArrowTrendUp} size='lg' className='m-2'/>
-              <h6 className='text-light fw-bold'>Trending now</h6>          
-            </div>
-          </div>
-          {isBlogFetched ? 
-             <>
-             {data.map((d,i) => {
-               const {image_url, title, ID, CreatedAt } = d
-               const time = new Date(CreatedAt)
-               return (
-                     <div key={i} className='border-0 shadow rounded-1 p-3 m-1 mb-3 col col-lg blog_body_container'>
-                   
-                     <div>
-                       <div className='blog_header p-1'>
-                         <Link to={`/articles/${ID}`} className='nav-link'>
-                           <h6 className='fw-bold'>{title}</h6>
-                         </Link>
-                       </div>
-                       <hr/>
-                         <div className='image_body mb-2 mt-2 shadow-sm rounded-4 border-0 p-2 bg-none d-flex align-items-center'>
-                             <img className='img-fluid rounded-4' src={image_url} alt='featured'/>
-                         </div>
-                       
-                         <div className='d-flex justify-content-between align-items-center text-secondary mt-3 p-2 pt-0 pb-0 category_date'>
-                         <div>
-                           <small className='btn btn-outline-danger rounded-5 btn-sm'>News</small>
-                         </div>
-                         <div className='d-flex align-items-center'>
-                           <FontAwesomeIcon 
-                             icon={faClock} 
-                             size='sm' 
-                             className='m-1'
-                           /> 
-                           <span className='text-secondary'>  
-                             {time.getDay() + " | " + time.getMonth()}
-                           </span>
-                         </div>
-                         </div>
-                         <hr/>
-                         <div className='d-flex justify-content-between mt-3'>
-                           <div>
-                             <Link to={`/articles/${ID}`} className='btn text-primary btn-sm fw-bold'>Read More...</Link>
-                           </div>
-                           <div>
-                           {/* <button className='btn btn-sm'>E</button>
-                           <button className='btn btn-sm'>D</button> */}
-                             <button className='btn text-dark btn-sm'>
-                               <FontAwesomeIcon icon={faHeart} size='lg'/>
-                             </button>
-                             <button className='btn text-dark btn-sm'>
-                               <FontAwesomeIcon icon={faShareNodes} size='lg'/>
-                             </button>
-                           </div>
-                         </div>
-                     </div>
-                   </div>
-                   )
-             }
-             )}
-           </> :
-           <LoaderIcon/>
-           }
-          </div>
-          <div className='d-flex justify-content-center mb-3'>
-            <button className='btn btn-primary btn-sm m-1' disabled>Previous</button>
-            <button className='btn btn-primary btn-sm m-1'>1</button>
-            <button className='btn btn-primary btn-sm m-1' disabled>Next</button>
-          </div>
-        </div>
-      </div>
+      <>
+      {categoryFetching ? <LoaderIcon/> : <>
+          <BlogMainComponent
+            classStyle="main-container"
+            textStyle={"light"}
+            categoryName={"Top Trending"}
+            categoryId={6}
+          />
+          {category.map((c,id) => {
+            return (
+              <div className='w-100'>
+              <BlogMainComponent 
+              key={id} 
+              textStyle={"dark"} 
+              categoryName={c.categoryName} 
+              categoryId={c.ID}
+              />
+              </div>
+            )
+          })}
+        </>}
+         
+      </>
+    
     )
   }
 
-  export default BlogPage
+  const BlogMainComponent = ({ classStyle, textStyle, categoryName, categoryId }) => {
+    const [isBlogFetched, setIsBlogsFetched] = useState(false)
+
+    const [data, setData] = useState([])
+    
+      const fetchData = async () => {
+        try {
+          const {data, status} = await axios.get(`/api/v1/blog?c_id=${categoryId}&featured=${true}`)     
+          if( status == 200) {
+            setIsBlogsFetched(true)
+            setData(data) 
+          }
+        } catch (error) {
+            console.error(error)
+        }
+      }
+
+      useEffect(() => {
+        fetchData()
+      }, [isBlogFetched, window.screen.width, categoryId, categoryName])
+      
+    return (
+      <div className={`'container card mt-3 mb-3 border-0 shadow' ${classStyle}`}>
+        <div className={`card card-header  border-0 d-flex flex-row bg-${classStyle}`}>
+          <div className='d-flex align-items-center fw-bold blog_header_first_child'>
+            <h3 className={`text-${textStyle} fw-bold`}>{categoryName}</h3>
+          </div>
+          <div className={`w-100 line-through-${textStyle}`}>
+             <span className='text-white'></span>
+           </div>
+        
+        </div>
+           {isBlogFetched ? 
+           <BlogComponent 
+            data={data}
+            textStyle={categoryName != "Top Trending" ? "dark" : "light"}          
+           />
+           :
+          <LoaderIcon/>
+          }
+     </div>
+    )
+  }
+
+  const BlogComponent = ({ textStyle, data }) => {
+    const [screenSize, ] = useState(window.screen.width)
+    const categoryName = data.category
+
+    return (
+      <div className={`shadow rounded-4 p-2 mb-3 row ${screenSize <= 760  && "d-flex flex-column "}`}>
+        <div className='col-sm-8'>
+          {data.featured.map((f,i) => {
+            const { image_url, title,ID, CreatedAt } = f
+            const timestamp = new Intl.DateTimeFormat('en-US', {month: "2-digit",day: "2-digit", year: "2-digit"}).format(new Date(CreatedAt))
+            return (
+              <div  key={i} className='col d-flex flex-column'>
+              <Link className='nav-link' to={`/articles/${ID}`}>
+              <div className='img_holder m-2 d-flex justify-content-center align-items-center'>
+                  <img 
+                    className='text-secondary img-fluid w-100' 
+                    src={image_url} 
+                    alt='logo' 
+                  />
+              </div>
+              <div className='headline_holder m-2'>
+                <div>
+                  <p><small className='text-warning'>{categoryName}</small></p>
+                </div>  
+                <h4 className={`text-${textStyle} mt-2 fw-bold`}>
+                  {title}
+                </h4>                   
+                <div className='d-flex align-items-center justify-content-between mt-2'>
+                  <Link className='nav-link text-warning fw-bold text-underline' to={`/articles/${ID}`}>Full Details <small>&gt;&gt;</small></Link>
+                  <small className='text-secondary'>{timestamp}</small>
+                </div>
+              </div>
+              </Link>
+              </div>
+            )
+          })}
+        </div>
+      
+        <div className='col'>
+            {data.data.map((d,i) => {
+            const { image_url, title,ID, CreatedAt } = d
+            const timestamp = new Intl.DateTimeFormat('en-US', {month: "2-digit",day: "2-digit", year: "2-digit"}).format(new Date(CreatedAt))             
+            return (
+                <div className='d-flex flex-column justify-content-between' key={i}>
+                  <Link className='nav-link' to={`/articles/${ID}`}>
+                    <div className='headline_holder'>
+                      <h6 className={`fw-bold text-${textStyle} mt-2`}>
+                        {title}
+                      </h6>
+                      <div>
+                        <p><small className='text-warning'>{categoryName}</small></p>
+                      </div>    
+                    </div> 
+                    <div className='d-flex align-items-center justify-content-center img_holder_child'>
+                      <img 
+                      className='img-fluid w-100'  
+                      src={image_url} alt='featured' />
+                    </div>
+                    <div className='d-flex align-items-center justify-content-between mt-3'>
+                        <Link className='nav-link fw-bold text-warning' to={`/articles/${ID}`}>
+                        <small>Read More</small>
+                        </Link>
+                        <small className='text-secondary'>{timestamp}</small>
+                    </div>
+                  </Link>
+                 
+                </div>
+              )
+            })}
+        </div>
+ </div>
+    )
+  }
+
+  export  {BlogPage, BlogMainComponent}

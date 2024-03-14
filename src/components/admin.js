@@ -6,7 +6,103 @@ const AdminComponent = () => {
   
     return (
         <div className="card">
+            <RoleComponent/>
+            <CategoryComponent/>
             <NewArticleComponent/>
+        </div>
+    )
+}
+
+const RoleComponent = () => {
+    const [role, setRole] = useState({
+        roleName: ''
+    }) 
+
+    const onchange = e => setRole({...role, [e.target.name]: e.target.value})
+    
+    const onsubmit = async () => {
+        try {
+        const { status, data } = await axios.post("/api/v1/roles", role)
+        if (status == 201) {
+            alert("added")
+        } 
+        } catch (error) {
+            console.error(error)
+        }
+     
+    }
+    return (
+        <div className="card m-2">
+            <div className="card card-header">
+                <h6>Add Role</h6>
+            </div>
+            <div className="card card-body">
+                <input 
+                    type="select" 
+                    className="form-control border-secondary" 
+                    placeholder="enter role"
+                    name="roleName"
+                    onChange={onchange}
+                />
+                <div>
+                    <button 
+                        className="btn btn-primary mt-2"
+                        onClick={onsubmit}
+                    >
+                        Submit
+                    </button>
+                </div>
+                
+            </div>
+            <div className="card card-header">
+                <h6>Assign Role</h6>
+            </div>
+        </div>
+    )
+}
+
+
+const CategoryComponent = () => {
+    const [category, setCategory] = useState({
+        categoryName: ''
+    }) 
+
+    const onchange = e => setCategory({...category, [e.target.name]: e.target.value})
+    
+    const onsubmit = async () => {
+        try {
+        const { status } = await axios.post("/api/v1/category", category)
+        if (status == 201) {
+            alert("added")
+        } 
+        } catch (error) {
+            console.error(error)
+        }
+     
+    }
+    return (
+        <div className="card m-2">
+            <div className="card card-header">
+                <h6>Add Category</h6>
+            </div>
+            <div className="card card-body">
+                <input 
+                    type="text" 
+                    className="form-control border-secondary" 
+                    placeholder="enter category"
+                    name="categoryName"
+                    onChange={onchange}
+                />
+                <div>
+                    <button 
+                        className="btn btn-primary mt-2"
+                        onClick={onsubmit}
+                    >
+                        Submit
+                    </button>
+                </div>
+                
+            </div>
         </div>
     )
 }
@@ -62,7 +158,7 @@ const NewArticleComponent = () => {
         loadQuil()
     }, [window.location.href])
     return (
-        <>
+        <div className="m-2">
             {articleLoaded && handleSuccessfulArticle()}
             <div className="card card-header bg-secondary">
                 <h4 className="text-white">Article</h4>
@@ -91,7 +187,7 @@ const NewArticleComponent = () => {
                     <button className="btn btn-primary" onClick={onsubmit}>Post Article</button>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
