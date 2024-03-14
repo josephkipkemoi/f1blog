@@ -15,8 +15,9 @@ const HeaderComponent = () => {
       <nav className='p-3 main-header-body w-100'>
         <div className='main-header d-flex justify-content-between align-items-center'>
           <Link className="nav-link" to="/">
-            <h1 className='fw-bold'>
-              <img src={Logo} alt="logo"/>
+            <h1 className='fw-bold text-white'>
+              SportsTidings
+              {/* <img src={Logo} alt="logo"/> */}
             </h1>
           </Link>
           {user ? <AuthenticatedLinks/> : <UnauthenticatedLinks/>}
@@ -53,7 +54,7 @@ const NavigationLinks = () => {
   }, [links.length])
   return (
   <nav className="navbar navbar-expand-lg navbar-light bg-none">
-  <Link className="nav-link text-light" to="/">Home</Link>
+  <Link className="nav-link text-light fw-bold" to="/">Home</Link>
   <button className="navbar-toggler text-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>
@@ -64,7 +65,7 @@ const NavigationLinks = () => {
       return (
         <li className="nav-item">
           <Link 
-            className="nav-link text-white" 
+            className="nav-link text-white fw-bold" 
             key={l.CreatedAt}
             to={`/sports?c_name=${l.categoryName}`}
           >
@@ -75,13 +76,16 @@ const NavigationLinks = () => {
       )
     } )}
      <li className="nav-item active">
-        <Link className="nav-link text-light" to="/tips">Tips<span class="sr-only">(current)</span></Link>
+        <Link className="nav-link text-light fw-bold" to="/tips">Tips<span className="sr-only">(current)</span></Link>
       </li>
       <li className="nav-item active">
-        <Link className="nav-link text-light" to="/contact-us">Contact<span class="sr-only">(current)</span></Link>
+        <Link className="nav-link text-light fw-bold" to="/contact-us">Contact<span className="sr-only">(current)</span></Link>
       </li>
-     <li className="nav-item active">
-        <Link className="nav-link text-warning fw-bold" to="/donate">Donate<span class="sr-only">(current)</span></Link>
+     <li className="d-flex align-items-center nav-item active">
+        <Link className="nav-link text-primary fw-bold" to="/donate">
+          <FontAwesomeIcon icon={faDollarSign} />
+          Donate<span className="sr-only">(current)</span>
+        </Link>
       </li>
     </ul>
   </div>

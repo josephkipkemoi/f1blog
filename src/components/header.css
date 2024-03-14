@@ -1,12 +1,15 @@
 .main-header-body {
-  background-color: purple;
+  position: relative;
+  top: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.829);
 }
 .main-header h1 {
     color: darkorange;
     font-weight: bolder;
   }
   .main-header-body hr {
-    border: 1px solid purple;
+    border: 1px solid rgba(228, 220, 228, 0.815);
   }
 .main-header img {
     position: absolute;
