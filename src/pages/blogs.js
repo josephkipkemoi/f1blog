@@ -15,6 +15,7 @@ const BlogPage = () => {
         if (status == 200) {        
           setCategoryFetching(false)
           setCategory(data.data)
+          localStorage.setItem("categories", JSON.stringify(data.data))
         }
       } catch (error) {
         setCategoryFetching(false)

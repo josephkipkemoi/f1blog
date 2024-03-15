@@ -79,7 +79,7 @@ const NavigationLinks = () => {
         <Link className="nav-link text-light fw-bold" to="/tips">Tips<span className="sr-only">(current)</span></Link>
       </li>
       <li className="nav-item active">
-        <Link className="nav-link text-light fw-bold" to="/contact-us">Contact<span className="sr-only">(current)</span></Link>
+        <Link className="nav-link text-light fw-bold" to="/contact-us">Contact Us<span className="sr-only">(current)</span></Link>
       </li>
      <li className="d-flex align-items-center nav-item active">
         <Link className="nav-link text-primary fw-bold" to="/donate">
