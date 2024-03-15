@@ -18,6 +18,7 @@ import TipsPage from './pages/tips';
 import SportPage from './pages/sport';
 import AboutUsPge from './pages/about-us';
 import PrivacyPolicyPage from './pages/privacy-policy';
+import TermsOfUsePage from './pages/terms-of-use';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -38,6 +39,7 @@ root.render(
         <Route path='/sports' element={<SportPage/>}/>
         <Route path='/about-us' element={<AboutUsPge/>} />
         <Route path='/privacy-policy' element={<PrivacyPolicyPage/>}/>
+        <Route path='/terms-of-use' element={<TermsOfUsePage/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

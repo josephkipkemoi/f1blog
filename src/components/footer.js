@@ -32,7 +32,7 @@ const FooterComponent = () => {
               <div className='col d-flex flex-column align-items-start'>
                 <h6 className='text-white fw-bold'>LEGAL INFORMATION</h6>
                 <Link className='text-light' to="/privacy-policy">Privacy Policy</Link>
-                <Link className='text-light' to="/terms-and-conditions">Terms and Conditions</Link>
+                <Link className='text-light' to="/terms-of-use">Terms of use</Link>
                 <Link className='text-light' to="/disclaimer">Disclaimer</Link>
               </div>
           </div>
