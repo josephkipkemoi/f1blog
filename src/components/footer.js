@@ -15,7 +15,7 @@ const FooterComponent = () => {
                 <div className='d-flex flex-column align-items-start'>
                   {ct.map((c,i) => {
                     return (
-                      <Link className='text-light'>{c.categoryName}</Link>
+                      <Link key={i} className='text-light'>{c.categoryName}</Link>
                     )
                   })}
                   <Link className='text-light' to="/tips">Tips</Link>
