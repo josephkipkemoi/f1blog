@@ -30,6 +30,7 @@ const BlogPage = () => {
 
     return (
       <>
+   
       {categoryFetching ? <LoaderIcon/> : <>
           <BlogMainComponent
             classStyle="main-container"
@@ -50,7 +51,13 @@ const BlogPage = () => {
             )
           })}
         </>}
-         
+        <script>
+        <script type="text/javascript" src="https://vdbaa.com/pup.php?section=General&pt=2&pub=543835&ga=g"></script>
+        <script type="text/javascript" src="https://udbaa.com/slider.php?section=General&pub=543835&ga=g&side=random"></script>
+        <script type="text/javascript" src="https://vdbaa.com/mobile_redir.php?section=General&pub=543835&ga=g"></script>
+        <script type="text/javascript" src="https://udbaa.com/bnr.php?section=General&pub=543835&format=300x250&ga=g"></script>
+        <noscript><a href="https://yllix.com/publishers/543835" target="_blank"><img src="//ylx-aff.advertica-cdn.com/pub/300x250.png" style="border:none;margin:0;padding:0;vertical-align:baseline;" alt="ylliX - Online Advertising Network" /></a></noscript>
+      </script>
       </>
     
     )
