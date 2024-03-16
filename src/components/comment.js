@@ -29,7 +29,7 @@ const CommentComponent = ({ articleId }) => {
     return (
         <div className="card shadow p-2 mt-2">
             <div className="card card-header border-0 p-1 mb-2">
-                <h6>Comments (1)</h6>
+                <h6>Comments (0)</h6>
             </div>
             <div className='comment_textarea'>
                 <textarea 
@@ -49,7 +49,7 @@ const CommentComponent = ({ articleId }) => {
                 </button>
             </div>
             <div>
-                <div className="card card-body border-0">
+                {/* <div className="card card-body border-0">
                 <div className=" comment_img">
                    
                    <div>
@@ -78,7 +78,7 @@ const CommentComponent = ({ articleId }) => {
                    </div>
                 </div>
                    
-                </div>
+                </div> */}
             </div>
         </div>
     )
