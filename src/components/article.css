@@ -8,6 +8,7 @@
 }
 .article_img img {
     min-width: 420px;
+    max-height: 420px;
 }
 .article_body {
     position: static;
