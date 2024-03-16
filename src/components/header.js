@@ -61,16 +61,16 @@ const NavigationLinks = () => {
 
   <div className="collapse navbar-collapse" id="navbarSupportedContent">
     <ul className="navbar-nav mr-auto">
-      {links?.data?.map(l => {
+      {links?.data?.map((l, i) => {
       return (
-        <li className="nav-item">
+        <li className="nav-item" key={i}>
           <Link 
             className="nav-link text-white fw-bold" 
             key={l.CreatedAt}
             to={`/sports?c_name=${l.categoryName}&c_id=${l.ID}`}
           >
             {l.categoryName}
-            <span class="sr-only">(current)</span>
+            <span className="sr-only">(current)</span>
           </Link>
         </li>
       )
