@@ -4,8 +4,9 @@ import './article.css'
 import CommentComponent from "./comment"
 import axios from "../lib/axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons"
+import { faArrowLeft, faArrowRight, faShare } from "@fortawesome/free-solid-svg-icons"
 import LoaderIcon from '../utils/loader'
+import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton, TelegramIcon, TelegramShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton } from "react-share"
 
 const ArticleComponent = ({ articleId }) => {
     const [articleLoaded, setArticleLoaded] = useState(false)
@@ -18,6 +19,8 @@ const ArticleComponent = ({ articleId }) => {
 
     const { title, body, image_url, author } = article
 
+    const articleUrl = window.location.href
+ 
     const fetchArticleById = async () => {
         try {
             const {data, status} = await axios.get(`/api/v1/blogs/${articleId}`)
@@ -45,6 +48,10 @@ const ArticleComponent = ({ articleId }) => {
         window.location.href = "/articles/" + id
     }
 
+    const handleShare = () => {
+
+    }
+
     useEffect(() => {
         fetchArticleById()
     }, [articleId, articleLoaded])
@@ -67,18 +74,68 @@ const ArticleComponent = ({ articleId }) => {
                 <div className="text-secondary mt-2 mb-2">
                     <small >Author: {author ?? "anonymous"}</small>
                 </div>
-                <button className="side_btn btn btn-dark" onClick={handleNextClick}>
+                <button className="side_btn btn" onClick={handleNextClick}>
                     <FontAwesomeIcon icon={faArrowRight} size="xl"/>
                 </button>
                 <ArticlePost/>
+              
                 <small className="mr-5">
                     <Link to="/" className="nav-link text-primary">Back to home</Link>
                 </small>
+                <div className="d-sm-flex justify-content-start flex-column mt-4 mb-4">
+                <small className="d-block">Share article</small>
+                <div>
+                <FacebookShareButton  
+                url={articleUrl}
+                >     
+                <button
+                    className="btn d-flex align-items-center justify-content-between"
+                >
+                    <FacebookIcon size={32}></FacebookIcon>
+                 </button>
+                 </FacebookShareButton> 
+                 <TwitterShareButton
+                    url={articleUrl}
+                 >
+                 <button
+                    className="btn  d-flex align-items-center justify-content-between"
+                >
+                    <TwitterIcon size={32}></TwitterIcon>
+                 </button>                 
+                 </TwitterShareButton>
+                 <WhatsappShareButton
+                    url={articleUrl}
+                 >
+                 <button
+                    className="btn d-flex align-items-center justify-content-between"
+                >
+                    <WhatsappIcon size={32}></WhatsappIcon>
+                 </button>                  
+                </WhatsappShareButton>
+                <TelegramShareButton
+                    url={articleUrl}
+                >    
+                 <button
+                    className="btn d-flex align-items-center justify-content-between"
+                >
+                    <TelegramIcon size={32}></TelegramIcon>
+                 </button>                  
+                </TelegramShareButton>
+                <LinkedinShareButton
+                    url={articleUrl}
+                >
+                <button
+                    className="btn d-flex align-items-center justify-content-between"
+                >
+                    <LinkedinIcon size={32}></LinkedinIcon>
+                 </button>  
+                </LinkedinShareButton>
+                </div>                
+                </div>              
                 <CommentComponent articleId={articleId}/>
             </div>
         </div> :
         <LoaderIcon/>}
-   
         </div>
     )
 }
