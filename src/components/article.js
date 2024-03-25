@@ -136,6 +136,7 @@ const ArticleComponent = ({ articleId }) => {
             </div>
         </div> :
         <LoaderIcon/>}
+        <script type='text/javascript' src='//pl22876204.profitablegatecpm.com/44/69/73/44697334abd9bfffd24e61a6cfc6186b.js'></script>
         </div>
     )
 }
